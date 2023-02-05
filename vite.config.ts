@@ -7,8 +7,9 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   resolve: {
-    alias: [
-      { find: '@', replacement: path.resolve(__dirname, 'src') },
-    ]
-  }
+    alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
+  },
+  build: {
+    target: 'esnext',
+  },
 })

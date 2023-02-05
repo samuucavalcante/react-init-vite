@@ -2,16 +2,23 @@ export type IAppTheme = typeof light
 
 
 export const light = {
-  primary: '#c30',
-  secondary: '',
-  background: '',
+  colors: {
 
-  text: '',
-  textMuted: '',
+    primary: '#c30',
+    secondary: '',
+    background: '',
 
-  success: '',
-  error: '',
-  warning: '',
+    text: '',
+    textMuted: '',
 
+    success: '',
+    error: '',
+    warning: '',
+
+    card: '',
+    cardContrast: '',
+
+  },
+  
   shadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)'
 } 

@@ -1,8 +1,15 @@
 import React from 'react'
 import { Container } from './styles'
+import { Text } from 'components/Common'
 
-export const Card = () => {
+type Props = {
+  // title: string
+}
+
+export const Card: React.FC<Props> = ({}) => {
   return (
-    <Container>Card</Container>
+    <Container>
+      <Text>Teste</Text>
+    </Container>
   )
 }

@@ -22,9 +22,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   useOnceCall(() => {
     if (!themeStorage) setThemeStorage('light')
+    
   })
-
+  
+  
+  
   const themeColors = (themeStorage === 'dark' ? dark : light) 
+  document.body.style.background =  themeColors.colors.background
 
   return (
     <ThemeContext.Provider value={{ theme: themeStorage, themeColors, setTheme: setThemeStorage }} >

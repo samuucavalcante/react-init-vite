@@ -5,10 +5,10 @@ import { RouteObject, createBrowserRouter } from "react-router-dom";
 const routes = [
   {
     path: "/",
-    element: <Home />
+    element: <Home />,
   },
   {
-    path: ":userId",
+    path: "/user",
     element: <User />
   },
 ] satisfies RouteObject[]
