@@ -1,42 +1,41 @@
-import { ITheme } from "providers/ThemeProvider";
-import { useState } from "react";
 
-type ILocalStorage = {
-  theme: ITheme
+import { useState } from 'react'
+
+export type Theme = "dark" | "light"
+
+export type SupportedStorage = {
+  theme: Theme
 }
 
-export function useLocalStorage(key: keyof ILocalStorage, initialValue?: never) {
-  const [storedValue, setStoredValue] = useState(() => {
-    if (typeof window === "undefined") {
-      return initialValue;
+type SupportedStorageKey = keyof SupportedStorage
+type SupportedStorageValue<K extends SupportedStorageKey> = SupportedStorage[K]
+
+export function useLocalStorage<T extends SupportedStorageKey>(key: T, initialValue?: SupportedStorageValue<T>) {
+  const [storedValue, setStoredValue] = useState<SupportedStorageValue<T>>(() => {
+    if (typeof window === 'undefined') {
+      return initialValue 
     }
 
     try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.log(error);
-      return initialValue;
+      console.log('caiu aqui')
+      const item = localStorage.getItem(key)
+      console.log(item)
+      return item ? JSON.parse(item) : initialValue
+    } catch (_error) {
+      return initialValue
     }
-  });
+  })
 
-  // Return a wrapped version of useState's setter function that ...
-  // ... persists the new value to localStorage.
-  const setValue = (value: typeof key) => {
+  const setValue = (value: SupportedStorageValue<T> | ((val: SupportedStorageValue<T>) => SupportedStorageValue<T>)) => {
     try {
-      // Allow value to be a function so we have same API as useState
-      const valueToStore =  value;
-      // Save state
-      setStoredValue(valueToStore);
-      // Save to local storage
-      if (typeof window !== "undefined") {
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      const valueToStore = value instanceof Function ? value(storedValue) : value
+      console.log('chegou')
+      setStoredValue(valueToStore)
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem(key, JSON.stringify(valueToStore))
       }
-    } catch (error) {
-      // A more advanced implementation would handle the error case
-      console.log(error);
-    }
-  };
+    } catch (_error) {}
+  }
 
-  return [storedValue, setValue];
+  return [storedValue, setValue] as const
 }
