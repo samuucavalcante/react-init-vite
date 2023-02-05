@@ -1,4 +1,4 @@
-import { IAppTheme } from "./light";
+import { IAppTheme } from './light'
 
 export const dark: IAppTheme = {
   colors: {
@@ -17,6 +17,5 @@ export const dark: IAppTheme = {
     cardContrast: '#2B2C2E',
   },
 
-
-  shadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)'
+  shadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
 }

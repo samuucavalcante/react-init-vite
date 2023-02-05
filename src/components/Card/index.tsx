@@ -6,7 +6,7 @@ type Props = {
   // title: string
 }
 
-export const Card: React.FC<Props> = ({}) => {
+export const Card: React.FC<Props> = () => {
   return (
     <Container>
       <Text>Teste</Text>

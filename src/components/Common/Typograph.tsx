@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
 type TextProps = {
   textColor?: string
@@ -16,11 +16,11 @@ export const Text = styled.span<TextProps>`
 `
 
 type TitleProps = {
-  tag?: "h1" | "h2" | "h3" | "h4" | "h5"
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5'
   children: React.ReactNode
 }
 
-export const Title: React.FC<TitleProps> = ({ tag = "h3", children }) => {
+export const Title: React.FC<TitleProps> = ({ tag = 'h3', children }) => {
   const Text = styled(tag)`
     color: ${({ theme }) => theme.colors.text};
     font-size: 18px;

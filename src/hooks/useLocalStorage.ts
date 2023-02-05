@@ -1,7 +1,6 @@
-
 import { useState } from 'react'
 
-export type Theme = "dark" | "light"
+export type Theme = 'dark' | 'light'
 
 export type SupportedStorage = {
   theme: Theme
@@ -10,10 +9,13 @@ export type SupportedStorage = {
 type SupportedStorageKey = keyof SupportedStorage
 type SupportedStorageValue<K extends SupportedStorageKey> = SupportedStorage[K]
 
-export function useLocalStorage<T extends SupportedStorageKey>(key: T, initialValue?: SupportedStorageValue<T>) {
+export function useLocalStorage<T extends SupportedStorageKey>(
+  key: T,
+  initialValue?: SupportedStorageValue<T>,
+) {
   const [storedValue, setStoredValue] = useState<SupportedStorageValue<T>>(() => {
     if (typeof window === 'undefined') {
-      return initialValue 
+      return initialValue
     }
 
     try {
@@ -26,7 +28,9 @@ export function useLocalStorage<T extends SupportedStorageKey>(key: T, initialVa
     }
   })
 
-  const setValue = (value: SupportedStorageValue<T> | ((val: SupportedStorageValue<T>) => SupportedStorageValue<T>)) => {
+  const setValue = (
+    value: SupportedStorageValue<T> | ((val: SupportedStorageValue<T>) => SupportedStorageValue<T>),
+  ) => {
     try {
       const valueToStore = value instanceof Function ? value(storedValue) : value
       console.log('chegou')
@@ -34,7 +38,9 @@ export function useLocalStorage<T extends SupportedStorageKey>(key: T, initialVa
       if (typeof window !== 'undefined') {
         window.localStorage.setItem(key, JSON.stringify(valueToStore))
       }
-    } catch (_error) {}
+    } catch (_error) {
+      //
+    }
   }
 
   return [storedValue, setValue] as const
